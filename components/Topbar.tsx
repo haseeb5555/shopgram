@@ -7,18 +7,15 @@ import { ThemeSwitch } from './theme-switcher'
 
 import { currentUser } from '@clerk/nextjs'
 import { Button } from './ui/button'
+import { Icons } from './icon'
+import Cart from './Cart'
 
 const Topbar = async() => {
   const user = await currentUser()
   return (
     <nav className='topbar'>
        <Link href="/" className='flex items-center gap-4'>
-            <Image
-              src='/assets/logo.svg'
-              width={28}
-              height={28}
-              alt='logo'
-            />
+       <Icons.logo className='h-12 w-auto' />
             <p className='text-heading3-bold  max-xs:hidden'>Shopgram</p>
        </Link>
        <div className='flex items-center gap-1'>
@@ -39,6 +36,7 @@ const Topbar = async() => {
         </div>
          {!user && <Link href='/sign-in'><Button variant='outline'>Sign In/Sign Up</Button></Link>}
          <ThemeSwitch/>
+         <Cart/>
          <UserButton  afterSignOutUrl='/sign-in'/>
         
        </div>

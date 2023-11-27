@@ -1,36 +1,47 @@
 import Image from 'next/image';
-import React from 'react';
+import Link from 'next/link';
+import AddToCartButton from './AddToCardButton';
 interface Props{
     name:string,
     image:string,
     quantity:string,
     price:string
+    _id:string
+     author:string
   }
-const ProductCard = ({name,image,quantity,price}:Props) => {
+const ProductCard = ({name,image,quantity,price,_id,author}:Props) => {
+  const product ={
+    name,
+    image,
+    quantity,
+    price,
+    _id,
+    author
+  }
   return (
     <div className="flex flex-col relative height-auto text-foreground box-border bg-content1 outline-none data-[focus-visible=true]:z-10 data-[focus-visible=true]:outline-2 data-[focus-visible=true]:outline-focus data-[focus-visible=true]:outline-offset-2 shadow-medium rounded-large transition-transform-background motion-reduce:transition-none overflow-visible h-auto lg:h-[240px] dark:border-transparent" >
       <div className="flex w-full p-3 flex-auto place-content-inherit align-items-inherit h-auto break-words text-left subpixel-antialiased relative flex-col md:flex-row md:items-center gap-4 md:gap-9 overflow-visible">
         {/* Image Section */}
-        <div className="flex-none w-full sm:w-48 h-48 mb-6 sm:mb-0 relative z-10 before:absolute before:top-0 before:left-0 before:w-full before:h-full before:bg-gradient-to-br transition-all !ease-soft-spring !duration-500 will-change-auto before:transition-all before:rounded-2xl before:from-[#010187] before:to-[#18000E]">
+        <div className="flex-none w-full sm:w-48 h-48 mb-6 sm:mb-0 relative before:absolute before:top-0 before:left-0 before:w-full before:h-full before:bg-gradient-to-br transition-all !ease-soft-spring !duration-500 will-change-auto before:transition-all before:rounded-2xl before:from-[#010187] before:to-[#18000E]">
           {/* Image */}
-        {/* <Image
+        <Image
         alt={name}
-        className=" z-10"
+        className="opacity-100 shadow-black/5 data-[loaded=true]:opacity-100 shadow-none transition-transform-opacity motion-reduce:transition-none object-[45%_50%] sm:scale-125 absolute z-10 sm:left-2 inset-0 w-full h-full object-cover rounded-lg transition-all will-change-auto !ease-soft-spring !duration-300"
         height={200}
         src={image}
         width={200}
-      /> */}
+      />
         </div>
 
         {/* Product Information Section */}
-        <div className="flex flex-col justify-center transition-all h-[200px]">
+        <div className="flex flex-col justify-center transition-all h-[200px] ml-2">
           <div className="relative flex flex-wrap items-baseline">
             {/* Product Title */}
             <h1 className="relative w-full flex-none text-xl font-semibold text-foreground">{name}</h1>
             {/* Product Description */}
             <p className="my-2 w-full text-base text-default-500">{quantity}</p>
             {/* Product Price */}
-            <p className="relative text-lg font-semibold text-foreground">{price}</p>
+            <p className="relative text-lg font-semibold text-foreground">{price}$</p>
             {/* Original Price */}
             <p className="relative line-through font-semibold text-default-400 ml-3">$350</p>
             {/* Discount */}
@@ -44,12 +55,12 @@ const ProductCard = ({name,image,quantity,price}:Props) => {
 
           {/* Action Buttons */}
           <div className="flex space-x-6 mt-2">
+            <Link href={`productDetail/${_id}`}>
             <button className="z-0 group relative inline-flex items-center justify-center box-border appearance-none select-none whitespace-nowrap subpixel-antialiased overflow-hidden tap-highlight-transparent outline-none data-[focus-visible=true]:z-10 data-[focus-visible=true]:outline-2 data-[focus-visible=true]:outline-focus data-[focus-visible=true]:outline-offset-2 px-unit-4 min-w-unit-20 h-unit-10 gap-unit-2 rounded-medium [&amp;>svg]:max-w-[theme(spacing.unit-8)] data-[pressed=true]:scale-[0.97] transition-transform-colors-opacity motion-reduce:transition-none shadow-lg shadow-primary/40 bg-primary text-primary-foreground data-[hover=true]:opacity-hover text-sm font-normal" type="button">
               Buy now
             </button>
-            <button className="z-0 group relative inline-flex items-center justify-center box-border appearance-none select-none whitespace-nowrap subpixel-antialiased overflow-hidden tap-highlight-transparent outline-none data-[focus-visible=true]:z-10 data-[focus-visible=true]:outline-2 data-[focus-visible=true]:outline-focus data-[focus-visible=true]:outline-offset-2 border-medium px-unit-4 min-w-unit-20 h-unit-10 gap-unit-2 rounded-full [&amp;>svg]:max-w-[theme(spacing.unit-8)] data-[pressed=true]:scale-[0.97] transition-transform-colors-opacity motion-reduce:transition-none bg-transparent border-primary text-primary data-[hover=true]:opacity-hover text-sm font-normal" type="button">
-              Add to bag
-            </button>
+            </Link>
+            <AddToCartButton product={product} />
           </div>
         </div>
 

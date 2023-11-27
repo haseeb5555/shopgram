@@ -2,18 +2,17 @@
 
 import { signal } from '@preact/signals'
 import Image from 'next/image'
+import { useState } from 'react'
 
 const Like = () => {
-  const isLiked = signal(false)
-
-  const toggleLike = () => {
-    isLiked.value = true
-  }
-  
+ const [isLiked, setIsLiked] = useState( false)
+    const toggleLike = () => {
+    setIsLiked((prev) => !prev)
+    }
   return (
     <button onClick={toggleLike}>
       <Image
-        src={isLiked.value ? '/assets/heart-filled.svg' : '/assets/heart-gray.svg'}
+        src={isLiked ? '/assets/heart-filled.svg' : '/assets/heart-gray.svg'}
         alt='heart'
         width={24}
         height={24}

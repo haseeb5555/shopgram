@@ -19,7 +19,7 @@ async function Page () {
    return (
    <>
    
-   <h1 className="head-text">Create Post</h1>
+   <h1 className="head-text">Create</h1>
    <div className="mt-9">
 
        <Tabs defaultValue="want to post?" className="w-full">

@@ -1,66 +1,3 @@
-export type SiteConfig = typeof siteConfig;
-
-export const siteConfig = {
-	name: "Next.js + NextUI",
-	description: "Make beautiful websites regardless of your design experience.",
-	navItems: [
-		{
-			label: "Home",
-			href: "/",
-		},
-    {
-      label: "Server Actions",
-      href: "/server-actions",
-    },
-    {
-      label: "Partial pre rendering",
-      href: "/partial-pre-rendering",
-    },
-    {
-      label: "React Query",
-      href: "/react-query",
-    },
-    {
-      label: "Signals",
-      href: "/signals",
-    }
-	],
-	navMenuItems: [
-		{
-			label: "Home",
-			href: "/",
-		},
-    {
-      label: "Server Actions",
-      href: "/server-actions",
-    },
-    {
-      label: "Partial pre rendering",
-      href: "/partial-pre-rendering",
-    },
-    {
-      label: "React Query",
-      href: "/react-query",
-    },
-    {
-      label: "Signals",
-      href: "/signals",
-    }
-	],
-	links: {
-		github: "https://github.com/nextui-org/nextui",
-		twitter: "https://twitter.com/getnextui",
-		docs: "https://nextui.org",
-		discord: "https://discord.gg/9b6yyZKmH4",
-    sponsor: "https://patreon.com/jrgarciadev"
-	},
-};
-
-
-
-
-
-
 
 export const profileTabs = [
   { value: "All Posts", label: "All Posts", icon: "/assets/reply.svg" },
@@ -81,7 +18,7 @@ export const sidebarLinks = [
     },
     {
       imgURL: "/assets/heart.svg",
-      route: "/activity",
+      route: "/notifications",
       label: "Activity",
     },
     {

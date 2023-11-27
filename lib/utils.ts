@@ -42,3 +42,19 @@ export function formatThreadCount(count: number): string {
   }
 }
 
+export const compressImage = async (imageDataUrl: string): Promise<string> => {
+  const image = await fetch(imageDataUrl).then((response) => response.blob());
+  const compressedImage = await new Promise((resolve, reject) => {
+    const imageBlob = new Blob([image], { type: 'image/*', quality: 0.5 });
+    const reader = new FileReader();
+    reader.onload = () => {
+      resolve(reader.result as string);
+    };
+    reader.onerror = () => {
+      reject(new Error('Failed to compress image'));
+    };
+    reader.readAsDataURL(imageBlob);
+  });
+
+  return compressedImage;
+};

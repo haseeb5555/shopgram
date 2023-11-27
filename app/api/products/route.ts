@@ -20,7 +20,7 @@ export async function POST(req:NextRequest){
          await User.findByIdAndUpdate(author,{
             $push:{products:createdProduct._id}
          })
-         revalidatePath('/create-post')
+         revalidatePath('/')
          return NextResponse.json({message:'Product created successfully',createdProduct})
       } catch (error:any) {
         console.log(error)

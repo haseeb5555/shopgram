@@ -215,5 +215,5 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate"),nextui()],
+  plugins: [require("daisyui"),require("tailwindcss-animate"),nextui()],
 }

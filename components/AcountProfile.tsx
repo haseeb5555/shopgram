@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import {
   Form,
   FormControl,
-  FormDescription,
+
   FormField,
   FormItem,
   FormLabel,
@@ -137,7 +137,7 @@ const AccountProfile = ({user,btnTitle}:Props) => {
                 )
           }
           </FormLabel>
-              <FormControl className="flex-1 text-base-semibold text-gray-200">
+              <FormControl className="flex-1 text-base-semibold">
                 <Input
                 type="file"
                 accept="image/*"
@@ -155,10 +155,10 @@ const AccountProfile = ({user,btnTitle}:Props) => {
           name="name"
           render={({ field }) => (
             <FormItem className="flex items-center gap-3 w-full">
-              <FormLabel className="text-base-semibold text-light-2">
+              <FormLabel className="text-base-semibold ">
                 Name
           </FormLabel>
-              <FormControl className="flex-1 text-base-semibold text-gray-200">
+              <FormControl className="flex-1 text-base-semibold ">
                 <Input
                 type="text"
                
@@ -174,10 +174,10 @@ const AccountProfile = ({user,btnTitle}:Props) => {
             name="username"
             render={({ field }) => (
               <FormItem className="flex items-center gap-3 w-full">
-                <FormLabel className="text-base-semibold text-light-2">
+                <FormLabel className="text-base-semibold ">
                   Username
             </FormLabel>
-                <FormControl className="flex-1 text-base-semibold text-gray-200">
+                <FormControl className="flex-1 text-base-semibold ">
                   <Input
                   type="text"
                  
@@ -193,10 +193,10 @@ const AccountProfile = ({user,btnTitle}:Props) => {
           name="bio"
           render={({ field }) => (
             <FormItem className="flex items-center gap-3 w-full">
-              <FormLabel className="text-base-semibold text-light-2">
+              <FormLabel className="text-base-semibold ">
                 Bio
           </FormLabel>
-              <FormControl className="flex-1 text-base-semibold text-gray-200">
+              <FormControl className="flex-1 text-base-semibold ">
                 <Textarea
                 rows={10}
                

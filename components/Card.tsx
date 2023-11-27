@@ -69,20 +69,21 @@ function Card({
                 {author.name}
               </h4>
             </Link>
-            {
-
-                image &&
-                <Image 
-                src={image}
-                alt={image}
-                width={400}
-                height={400}
-                className="object-contain rounded-lg"
-              />
-            } 
+           
                
 
             <p className='mt-2 text-small-regular '>{content}</p>
+            {
+
+              image &&
+              <Image 
+              src={image}
+              alt={image}
+              width={400}
+              height={400}
+              className="object-contain rounded-lg mt-2"
+              />
+              } 
 
             <div className="mt-5 flex flex-col gap-3">
               <div className='flex flex-row gap-3.5'>

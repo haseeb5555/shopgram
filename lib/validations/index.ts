@@ -25,6 +25,7 @@ export const CommentValidation = z.object({
 })
 
 export const ProductValidation = z.object({
+    _id:z.string().optional(),
     name:z.string().nonempty(),
     price:z.string().nonempty(),
     image:z.string().nonempty() || undefined,

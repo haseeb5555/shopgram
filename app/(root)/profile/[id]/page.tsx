@@ -1,12 +1,10 @@
 import PostsTab from "@/components/PostTab";
 import ProductTab from "@/components/ProductTab";
 import ProfileHeader from "@/components/ProfileHeader";
-
 import { Tabs ,TabsContent,TabsList, TabsTrigger, } from "@/components/ui/tabs";
 import { profileTabs } from "@/constants";
 import { fetchUser } from "@/lib/actions/user.action";
 import {currentUser} from "@clerk/nextjs"
-
 import Image from "next/image";
 import { redirect } from "next/navigation";
 
@@ -31,7 +29,7 @@ const Page = async ({params}:{params:{id:string}}) => {
     />
     <div className="mt-9">
 
-       <Tabs defaultValue="Store" className="w-full">
+       <Tabs defaultValue="All Posts" className="w-full">
         <TabsList className="tab" >
            {profileTabs.map((tab)=>(
             <TabsTrigger key={tab.label} value={tab.value} className="tab">
@@ -45,15 +43,15 @@ const Page = async ({params}:{params:{id:string}}) => {
               />
               <p className="max-sm:hidden">{tab.label}</p>
               {tab.label=== 'All Posts' && (
-                <p className="ml-1 rounded-sm bg-light-4 px-2 py-1 !text-tiny-medium text-light-2 ">
-                  {userInfo?.threads?.length}
+                <p className="ml-1 rounded-sm bg-light-4 px-2 py-1 !text-tiny-medium">
+                  {userInfo?.posts?.length}
                 </p>
               )}
             </TabsTrigger>
            ))}
         </TabsList>
         {profileTabs.map((tab)=>(
-            <TabsContent key={`content-${tab.label}`} value={tab.value} className="w-full text-light-1">
+            <TabsContent key={`content-${tab.label}`} value={tab.value} className="w-full ">
 
               {
                 tab.value === 'All Posts' ? (

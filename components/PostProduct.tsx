@@ -1,11 +1,9 @@
 "use client"
-
 import { useForm } from "react-hook-form"
 import { Button } from "@/components/ui/button"
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -14,16 +12,14 @@ import {
 
 import { Textarea } from "@/components/ui/textarea"
 import {zodResolver} from '@hookform/resolvers/zod'
-import { ProductValidation, ThreadValidation } from "@/lib/validations";
-
+import { ProductValidation } from "@/lib/validations";
 import * as z from  'zod' 
 import {usePathname,useRouter} from 'next/navigation'
-import { createThread } from "@/lib/actions/post.action"
 import Image from "next/image"
 import { Input } from "./ui/input"
 import { useUploadThing } from "@/lib/uploadthing"
 import {useState,ChangeEvent} from 'react'
-import { isBase64Image } from "@/lib/utils"
+import { compressImage, isBase64Image } from "@/lib/utils"
 import {useMutation} from '@tanstack/react-query'
 import axios from 'axios';
 import {toast, Toaster} from 'sonner'
@@ -47,12 +43,12 @@ import {toast, Toaster} from 'sonner'
 
     const { mutate,isPending,variables } = useMutation({
             mutationFn: async (values:z.infer<typeof ProductValidation>) => {
-                const {data} = await axios.post('http://localhost:3000/api/products',values)
+                const {data} = await axios.post('/api/products',values)
                 return data
             },
             onSuccess:()=>{
                 toast.success('Product Added Successfully')
-                
+                form.reset()
                
             },
             onError:(err)=>{
@@ -61,7 +57,7 @@ import {toast, Toaster} from 'sonner'
         })
         const onSubmit= async(values:z.infer<typeof ProductValidation>)=>{
             const blob = values.image
-            const hasIsImageChanged = blob
+            const hasIsImageChanged = isBase64Image(blob)
 
             if (hasIsImageChanged){
                 const imgRes= await startUpload(files)
@@ -76,26 +72,26 @@ import {toast, Toaster} from 'sonner'
 
         
   
-   const handleImage=(e:ChangeEvent<HTMLInputElement>,fieldChange:(value:string)=>void)=>{
-    e.preventDefault();
-    const fileReader = new FileReader();
-    if (e.target.files && e.target.value.length>0){
-      const file = e.target.files[0];
-
-      setFiles(Array.from(e.target.files))
-
-      if (!file.type.includes('image')) return;
-
-      fileReader.onload = async (event)=>{
-
-      const imageDataUrl = event.target?.result?.toString()|| ''
-
-      fieldChange(imageDataUrl)
-      }
-
-      fileReader.readAsDataURL(file)
-    }
-  }
+        const handleImage = (e: ChangeEvent<HTMLInputElement>, fieldChange: (value: string) => void) => {
+          e.preventDefault();
+          const fileReader = new FileReader();
+        
+          if (e.target.files && e.target.value.length > 0) {
+            const file = e.target.files[0];
+        
+            if (!file.type.includes('image')) {
+              return;
+            }
+        
+            fileReader.onload = async (event) => {
+              const imageDataUrl = event.target?.result?.toString() || '';
+              const compressedImageDataUrl = await compressImage(imageDataUrl);
+              fieldChange(compressedImageDataUrl);
+            };
+        
+            fileReader.readAsDataURL(file);
+          }
+        };
     return(
         <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className=" mt-10 flex flex-col justify-start gap-10">
@@ -141,7 +137,7 @@ import {toast, Toaster} from 'sonner'
             </FormItem>
           )}
         /> 
-        <FormField
+         <FormField
           control={form.control}
           name="quantity"
           render={({ field }) => (
@@ -150,14 +146,13 @@ import {toast, Toaster} from 'sonner'
                 Description
           </FormLabel>
               <FormControl className="no-focus border border-dark-4 ">
-                <Input
-                 
+                <Textarea
+                  rows={5}
                
       
                 {...field}
                 />
               </FormControl>
-              <FormMessage/>
             </FormItem>
           )}
         /> 

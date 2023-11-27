@@ -1,4 +1,3 @@
-import React from "react";
 import {Skeleton} from "@nextui-org/react";
 
 export default function loading() {
@@ -59,12 +58,3 @@ export default function loading() {
   );
 }
 
-// // import React from 'react'
-
-// // const loading = () => {
-// //   return (
-// //     <div>loading</div>
-// //   )
-// // }
-
-// export default loading

@@ -23,6 +23,14 @@ export const userSchema =  new mongoose.Schema({
     }
    ],
 
+   messages:[
+      {
+      type:  mongoose.Schema.Types.ObjectId,
+      ref:"Message"
+      
+      }
+   ]
+,
    onboarded:{
     type:Boolean,
     default:false
